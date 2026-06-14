@@ -61,15 +61,14 @@
         </div>
     </section>
 
-    <!-- חלק "תוצרי למידה" (כפתור נקי בלבד) -->
+    <!-- חלק "תוצרי למידה" (כפתור המפעיל חלון תמונה צף) -->
     <section id="learning" class="py-24 bg-slate-50 px-6 border-t border-slate-100">
         <div class="max-w-3xl mx-auto text-center">
             <h2 class="text-3xl font-bold text-blue-900 mb-8">תוצרי למידה</h2>
-            <!-- להחלפת הקישור: החליפי את ה-href בקישור לתיקיית Google Drive של תוצרי הלמידה -->
-            <a href="https://drive.google.com" target="_blank" class="inline-flex items-center gap-3 px-8 py-4 bg-blue-900 text-white rounded-xl hover:bg-blue-800 transition-all shadow-md hover:shadow-lg font-medium">
+            <button onclick="openModal()" class="inline-flex items-center gap-3 px-8 py-4 bg-blue-900 text-white rounded-xl hover:bg-blue-800 transition-all shadow-md hover:shadow-lg font-medium cursor-pointer">
                 <span>לצפייה בתוצרי למידה</span>
                 <svg class="w-5 h-5 transform rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
-            </a>
+            </button>
         </div>
     </section>
 
@@ -134,6 +133,49 @@
             <p class="text-xs text-slate-600">כל הזכויות שמורות &copy; ד"ר סופי דומבה דורון</p>
         </div>
     </footer>
+
+    <!-- מודל (חלון צף) מודרני להצגת תמונת תוצרי הלמידה -->
+    <div id="learningModal" class="fixed inset-0 z-50 hidden bg-slate-900/80 backdrop-blur-sm flex items-center justify-center p-4 transition-all duration-300">
+        <div class="bg-white rounded-2xl max-w-2xl w-full overflow-hidden shadow-2xl relative border border-slate-100">
+            <!-- כפתור סגירה מהיר -->
+            <button onclick="closeModal()" class="absolute top-4 right-4 bg-slate-100 hover:bg-slate-200 text-slate-700 rounded-full p-2 transition-colors z-10 cursor-pointer">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                </svg>
+            </button>
+            <!-- תוכן פנים המודל -->
+            <div class="p-6 flex flex-col items-center">
+                <h3 class="text-xl font-bold text-slate-900 mb-4 text-center">תוצרי למידה</h3>
+                <div class="w-full flex justify-center bg-slate-50 rounded-xl p-4 border border-slate-100">
+                    <!-- קישור לתמונה מקומית עם פולבק לתצוגה מקדימה נקייה -->
+                    <img src="QR_with_Thrombocyte (2).pngNAIT.png" alt="תוצרי למידה" class="max-w-full max-h-[70vh] rounded-lg object-contain shadow-sm" onerror="this.onerror=null; this.src='https://placehold.co/600x450/f1f5f9/0f172a?text=QR_with_Thrombocyte+(2).png';">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- סקריפט לשליטה במודל -->
+    <script>
+        function openModal() {
+            const modal = document.getElementById('learningModal');
+            modal.classList.remove('hidden');
+            document.body.style.overflow = 'hidden'; // מניעת גלילה של הרקע
+        }
+
+        function closeModal() {
+            const modal = document.getElementById('learningModal');
+            modal.classList.add('hidden');
+            document.body.style.overflow = ''; // החזרת הגלילה
+        }
+
+        // סגירת החלון בלחיצה מחוץ לתוכן שלו
+        window.addEventListener('click', function(event) {
+            const modal = document.getElementById('learningModal');
+            if (event.target === modal) {
+                closeModal();
+            }
+        });
+    </script>
 
 </body>
 </html>
