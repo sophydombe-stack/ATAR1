@@ -1,39 +1,226 @@
-<!-- ... existing code ... -->
-    <!-- חלק "עבודות אישיות" (כפתור נקי בלבד) -->
-    <section id="portfolio" class="py-24 bg-slate-50 px-6 border-t border-slate-100">
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ד"ר סופי דומבה דורון - פרופיל מקצועי</title>
+    <!-- טעינת Tailwind CSS לעיצוב מודרני ונקי -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- טעינת פונט 'Inter' ופונט עברי 'Assistant' לחוויית קריאה מושלמת -->
+    <link href="https://fonts.googleapis.com/css2?family=Assistant:wght@300;400;600;700;800&family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Assistant', 'Inter', sans-serif;
+        }
+    </style>
+</head>
+<body class="bg-slate-50 text-slate-800 antialiased min-h-screen flex flex-col">
+
+    <!-- סרגל ניווט עליון קבוע -->
+    <header class="sticky top-0 z-40 bg-white/80 backdrop-blur-md border-b border-slate-100 shadow-sm">
+        <div class="max-w-6xl mx-auto px-6 py-4 flex justify-between items-center">
+            <div class="flex items-center gap-2">
+                <span class="text-xl font-bold bg-gradient-to-r from-blue-900 to-indigo-700 bg-clip-text text-transparent">ד"ר סופי דומבה דורון</span>
+            </div>
+            <nav class="hidden md:flex items-center gap-8 text-sm font-medium text-slate-600">
+                <a href="#about" class="hover:text-blue-950 transition-colors">מי אני</a>
+                <a href="#cv" class="hover:text-blue-950 transition-colors">קורות חיים</a>
+                <a href="#learning" class="hover:text-blue-950 transition-colors">תוצרי למידה</a>
+                <a href="#developments" class="hover:text-blue-950 transition-colors">פיתוחים שונים</a>
+                <a href="#portfolio" class="hover:text-blue-950 transition-colors">עבודות אישיות</a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- חלק הפתיח הראשי (Hero Section) -->
+    <section class="relative bg-gradient-to-b from-blue-50/50 via-white to-slate-50 py-24 px-6 text-center border-b border-slate-100">
+        <div class="max-w-4xl mx-auto">
+            <span class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-semibold bg-blue-50 text-blue-800 mb-6">
+                מחקר קליני • חדשנות בבריאות • מנהיגות מקצועית
+            </span>
+            <h1 class="text-4xl md:text-6xl font-extrabold text-blue-950 tracking-tight leading-tight mb-6">
+                ד"ר סופי דומבה דורון
+            </h1>
+            <p class="text-xl md:text-2xl text-slate-600 font-light max-w-2xl mx-auto leading-relaxed">
+                שילוב של מדע, חמלה וחדשנות טכנולוגית לשיפור איכות הטיפול והובלת מהלכים קליניים מתקדמים.
+            </p>
+        </div>
+    </section>
+
+    <!-- חלק "מי אני" (אודות) -->
+    <section id="about" class="py-24 bg-white px-6">
         <div class="max-w-3xl mx-auto text-center">
-            <h2 class="text-3xl font-bold text-blue-900 mb-8">עבודות אישיות</h2>
-            <div class="flex flex-col sm:flex-row justify-center items-center gap-4">
-                <!-- הפעלת חלון צף לעבודות של ליה -->
-                <button onclick="openLeyaModal()" class="w-full sm:w-auto inline-flex items-center justify-center gap-3 px-8 py-4 bg-blue-900 text-white rounded-xl hover:bg-blue-800 transition-all shadow-md hover:shadow-lg font-medium cursor-pointer">
-                    <span>עבודות לליה</span>
-                    <svg class="w-5 h-5 transform rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
-                </button>
-                
-                <!-- הפעלת חלון צף לעבודות של גאיה -->
-                <button onclick="openGayaModal()" class="w-full sm:w-auto inline-flex items-center justify-center gap-3 px-8 py-4 bg-slate-900 text-white rounded-xl hover:bg-slate-800 transition-all shadow-md hover:shadow-lg font-medium cursor-pointer">
-                    <span>עבודות לגאיה</span>
-                    <svg class="w-5 h-5 transform rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
-                </button>
+            <h2 class="text-3xl font-bold text-blue-900 mb-8">מי אני</h2>
+            <div class="text-right text-lg text-slate-600 space-y-6 leading-relaxed max-w-2xl mx-auto" dir="rtl">
+                <p>
+                    אני אחות מומחית קלינית, חוקרת ומובילת פרויקטים טכנולוגיים ומחקריים במערכת הבריאות. לאורך שנותיי המקצועיות, הקדשתי את פועלי לשילוב בין ידע קליני מעמיק לבין פיתוחים חדשניים המשפרים את בטיחות המטופל ומייעלים את העבודה הטיפולית בשטח.
+                </p>
+                <p>
+                    העשייה שלי נשענת על גישה אקדמית מחקרית מחד, ועבודה קלינית רגישה וממוקדת-אדם מאידך. אני מאמינה כי המפתח לשיפור פני הרפואה טמון בפיתוח עזרי למידה מתקדמים, הטמעת מודלים חדשניים ופיתוח כלים דיגיטליים המסייעים לקבלת החלטות בזמן אמת.
+                </p>
+            </div>
+            
+            <!-- תמונת הפרופיל מתחת לטקסט בחצי מהגודל המקורי, ממוקמת במרכז -->
+            <div class="mt-12 flex justify-center">
+                <div class="relative group max-w-[200px] w-full">
+                    <div class="absolute inset-0 bg-blue-100 rounded-2xl transform rotate-3 scale-105 group-hover:rotate-1 transition-transform duration-300"></div>
+                    <img src="Gemini_Generated_Image_5yii9q5yii9q5yii.png" alt="ד"ר סופי דומבה דורון" class="relative rounded-2xl shadow-md w-full aspect-square object-cover border border-slate-100 transition-transform duration-300 group-hover:scale-[1.02]" onerror="this.onerror=null; this.src='https://placehold.co/200x200/e2e8f0/1e293b?text=סופי+דומבה+דורון';">
+                </div>
             </div>
         </div>
     </section>
 
     <!-- חלק קורות חיים -->
-<!-- ... existing code ... -->
-    <!-- מודל (חלון צף) מודרני מורחב להצגת עבודות לגאיה -->
+    <section id="cv" class="py-24 bg-slate-50 px-6 border-t border-slate-100">
+        <div class="max-w-3xl mx-auto text-center">
+            <h2 class="text-3xl font-bold text-blue-900 mb-8">קורות חיים</h2>
+            <div class="flex justify-center">
+                <a href="CV2026.pdf" download="CV2026.pdf" class="inline-flex items-center justify-center gap-3 px-8 py-4 bg-blue-900 text-white rounded-xl hover:bg-blue-800 transition-all shadow-md hover:shadow-lg font-medium cursor-pointer">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path>
+                    </svg>
+                    <span>להורדת קורות חיים מלאים (PDF)</span>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- חלק תוצרי למידה -->
+    <section id="learning" class="py-24 bg-white px-6 border-t border-slate-100">
+        <div class="max-w-3xl mx-auto text-center">
+            <h2 class="text-3xl font-bold text-blue-900 mb-8">תוצרי למידה</h2>
+            <div class="flex justify-center">
+                <button onclick="openLearningModal()" class="inline-flex items-center justify-center gap-3 px-8 py-4 bg-slate-900 text-white rounded-xl hover:bg-slate-800 transition-all shadow-md hover:shadow-lg font-medium cursor-pointer">
+                    <span>לצפייה בתוצרי למידה</span>
+                    <svg class="w-5 h-5 transform rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path>
+                    </svg>
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- חלק פיתוחים שונים -->
+    <section id="developments" class="py-24 bg-slate-50 px-6 border-t border-slate-100">
+        <div class="max-w-3xl mx-auto text-center">
+            <h2 class="text-3xl font-bold text-blue-900 mb-8">פיתוחים שונים</h2>
+            <div class="flex justify-center">
+                <a href="#" class="inline-flex items-center justify-center gap-3 px-8 py-4 bg-blue-900 text-white rounded-xl hover:bg-blue-800 transition-all shadow-md hover:shadow-lg font-medium cursor-pointer">
+                    <span>לצפייה בפיתוחים שונים</span>
+                    <svg class="w-5 h-5 transform rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path>
+                    </svg>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- חלק עבודות אישיות -->
+    <section id="portfolio" class="py-24 bg-white px-6 border-t border-slate-100">
+        <div class="max-w-3xl mx-auto text-center">
+            <h2 class="text-3xl font-bold text-blue-900 mb-8">עבודות אישיות</h2>
+            <div class="flex flex-col sm:flex-row justify-center items-center gap-4">
+                <!-- כפתור עבודות לליה -->
+                <button onclick="openLeyaModal()" class="w-full sm:w-auto inline-flex items-center justify-center gap-3 px-8 py-4 bg-blue-900 text-white rounded-xl hover:bg-blue-800 transition-all shadow-md hover:shadow-lg font-medium cursor-pointer">
+                    <span>עבודות לליה</span>
+                    <svg class="w-5 h-5 transform rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path>
+                    </svg>
+                </button>
+                
+                <!-- כפתור עבודות לגאיה -->
+                <button onclick="openGayaModal()" class="w-full sm:w-auto inline-flex items-center justify-center gap-3 px-8 py-4 bg-slate-900 text-white rounded-xl hover:bg-slate-800 transition-all shadow-md hover:shadow-lg font-medium cursor-pointer">
+                    <span>עבודות לגאיה</span>
+                    <svg class="w-5 h-5 transform rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path>
+                    </svg>
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- תחתית האתר -->
+    <footer class="mt-auto py-8 bg-slate-900 text-slate-400 text-center text-sm border-t border-slate-800">
+        <p>© 2026 ד"ר סופי דומבה דורון. כל הזכויות שמורות.</p>
+    </footer>
+
+    <!-- מודל תוצרי למידה -->
+    <div id="learningModal" class="fixed inset-0 z-50 hidden bg-slate-900/80 backdrop-blur-sm flex items-center justify-center p-4 transition-all duration-300 overflow-y-auto">
+        <div class="bg-white rounded-2xl max-w-2xl w-full my-8 overflow-hidden shadow-2xl relative border border-slate-100">
+            <button onclick="closeLearningModal()" class="absolute top-4 right-4 bg-slate-100 hover:bg-slate-200 text-slate-700 rounded-full p-2 transition-colors z-10 cursor-pointer">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                </svg>
+            </button>
+            <div class="p-8">
+                <h3 class="text-2xl font-bold text-slate-900 mb-6 text-center border-b pb-4">תוצרי למידה</h3>
+                <div class="flex justify-center">
+                    <img src="QR_with_Thrombocyte (2).pngNAIT.png" alt="תוצר למידה" class="max-w-full h-auto rounded-lg shadow-md" onerror="this.onerror=null; this.src='https://placehold.co/600x400/f1f5f9/0f172a?text=QR_with_Thrombocyte+(2).pngNAIT.png';">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- מודל עבודות לליה -->
+    <div id="leyaModal" class="fixed inset-0 z-50 hidden bg-slate-900/80 backdrop-blur-sm flex items-center justify-center p-4 transition-all duration-300 overflow-y-auto">
+        <div class="bg-white rounded-2xl max-w-4xl w-full my-8 overflow-hidden shadow-2xl relative border border-slate-100">
+            <button onclick="closeLeyaModal()" class="absolute top-4 right-4 bg-slate-100 hover:bg-slate-200 text-slate-700 rounded-full p-2 transition-colors z-10 cursor-pointer">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                </svg>
+            </button>
+            <div class="p-8">
+                <h3 class="text-2xl font-bold text-slate-900 mb-6 text-center border-b pb-4">עבודות לליה</h3>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8 text-right" dir="rtl">
+                    <!-- טור 1: ספרים ומסמכים -->
+                    <div class="space-y-6">
+                        <div>
+                            <h4 class="text-lg font-semibold text-slate-800 mb-4 flex items-center gap-2">
+                                <span class="w-2.5 h-2.5 rounded-full bg-blue-600 inline-block"></span>
+                                ספרים ומסמכים (PDF)
+                            </h4>
+                            <div class="p-4 bg-slate-50 rounded-xl border border-slate-100 hover:border-blue-200 transition-colors flex flex-col justify-between h-32">
+                                <span class="font-medium text-slate-900 block text-base">ליה והסוד של כיתה א.pdf</span>
+                                <a href="ליה והסוד של כיתה א.pdf" download="ליה והסוד של כיתה א.pdf" class="self-start inline-flex items-center gap-1.5 text-sm text-blue-600 hover:text-blue-800 font-medium">
+                                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path>
+                                    </svg>
+                                    <span>להורדה וקריאה</span>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- טור 2: איורים ויצירות -->
+                    <div class="space-y-6">
+                        <h4 class="text-lg font-semibold text-slate-800 mb-4 flex items-center gap-2">
+                            <span class="w-2.5 h-2.5 rounded-full bg-emerald-500 inline-block"></span>
+                            איורים ויצירות
+                        </h4>
+                        <div class="grid grid-cols-2 gap-4">
+                            <div class="group relative bg-slate-50 rounded-xl overflow-hidden border border-slate-100 aspect-square flex items-center justify-center">
+                                <img src="Gemini_Generated_Image_tkd5xstkd5xstkd5.png" alt="איור ליה 1" class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105" onerror="this.onerror=null; this.src='https://placehold.co/200x200/f1f5f9/0f172a?text=Image_1';">
+                            </div>
+                            <div class="group relative bg-slate-50 rounded-xl overflow-hidden border border-slate-100 aspect-square flex items-center justify-center">
+                                <img src="Gemini_Generated_Image_67wcy167wcy167wc.png" alt="איור ליה 2" class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105" onerror="this.onerror=null; this.src='https://placehold.co/200x200/f1f5f9/0f172a?text=Image_2';">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- מודל עבודות לגאיה -->
     <div id="gayaModal" class="fixed inset-0 z-50 hidden bg-slate-900/80 backdrop-blur-sm flex items-center justify-center p-4 transition-all duration-300 overflow-y-auto">
         <div class="bg-white rounded-2xl max-w-4xl w-full my-8 overflow-hidden shadow-2xl relative border border-slate-100">
-            <!-- כפתור סגירה מהיר -->
             <button onclick="closeGayaModal()" class="absolute top-4 right-4 bg-slate-100 hover:bg-slate-200 text-slate-700 rounded-full p-2 transition-colors z-10 cursor-pointer">
                 <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
                 </svg>
             </button>
-            
             <div class="p-8">
                 <h3 class="text-2xl font-bold text-slate-900 mb-6 text-center border-b pb-4">עבודות לגאיה</h3>
-                
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-8 text-right" dir="rtl">
                     <!-- טור 1: קבצי PDF / ספרים וסרטונים -->
                     <div class="space-y-6">
@@ -43,9 +230,11 @@
                                 ספרים ומסמכים (PDF)
                             </h4>
                             <div class="p-4 bg-slate-50 rounded-xl border border-slate-100 hover:border-blue-200 transition-colors flex flex-col justify-between h-32">
-                                <span class="font-medium text-slate-900 block text-base">האצבעות של גאיה יוצאות להרפתקאה (1)</span>
-                                <a href="האצבעות של גאיה יוצאות להרפתקאה (1).pdf" download="האצבעות של גאיה יוצאות להרפתקאה (1).pdf" target="_blank" class="self-start inline-flex items-center gap-1.5 text-sm text-blue-600 hover:text-blue-800 font-medium">
-                                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path></svg>
+                                <span class="font-medium text-slate-900 block text-base">האצבעות של גאיה יוצאות להרפתקאה (1).pdf</span>
+                                <a href="האצבעות של גאיה יוצאות להרפתקאה (1).pdf" download="האצבעות של גאיה יוצאות להרפתקאה (1).pdf" class="self-start inline-flex items-center gap-1.5 text-sm text-blue-600 hover:text-blue-800 font-medium">
+                                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path>
+                                    </svg>
                                     <span>להורדה וקריאה</span>
                                 </a>
                             </div>
@@ -61,7 +250,7 @@
                                     <source src="הבחירה_הקסומה_של_גאיה.mp4" type="video/mp4">
                                     הדפדפן שלך אינו תומך בנגן הוידאו.
                                 </video>
-                                <span class="text-xs text-slate-500 block mt-2 text-center">הבחירה הקסומה של גאיה.mp4</span>
+                                <span class="text-xs text-slate-500 block mt-2 text-center">הבחירה_הקסומה_של_גאיה.mp4</span>
                             </div>
                         </div>
                     </div>
@@ -81,20 +270,21 @@
         </div>
     </div>
 
-    <!-- סקריפט לשליטה במודל -->
     <script>
-        function openModal() {
+        // מודל תוצרי למידה
+        function openLearningModal() {
             const modal = document.getElementById('learningModal');
             modal.classList.remove('hidden');
-            document.body.style.overflow = 'hidden'; // מניעת גלילה של הרקע
+            document.body.style.overflow = 'hidden';
         }
 
-        function closeModal() {
+        function closeLearningModal() {
             const modal = document.getElementById('learningModal');
             modal.classList.add('hidden');
-            document.body.style.overflow = ''; // החזרת הגלילה
+            document.body.style.overflow = '';
         }
 
+        // מודל עבודות לליה
         function openLeyaModal() {
             const modal = document.getElementById('leyaModal');
             modal.classList.remove('hidden');
@@ -107,6 +297,7 @@
             document.body.style.overflow = '';
         }
 
+        // מודל עבודות לגאיה
         function openGayaModal() {
             const modal = document.getElementById('gayaModal');
             modal.classList.remove('hidden');
@@ -124,8 +315,9 @@
             const learningModal = document.getElementById('learningModal');
             const leyaModal = document.getElementById('leyaModal');
             const gayaModal = document.getElementById('gayaModal');
+            
             if (event.target === learningModal) {
-                closeModal();
+                closeLearningModal();
             }
             if (event.target === leyaModal) {
                 closeLeyaModal();
@@ -135,6 +327,5 @@
             }
         });
     </script>
-
 </body>
 </html>
