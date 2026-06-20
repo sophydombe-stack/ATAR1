@@ -106,13 +106,13 @@
         <div class="max-w-3xl mx-auto text-center">
             <h2 class="text-3xl font-bold text-blue-900 mb-8">פיתוחים מקצועיים שונים</h2>
             <div class="flex flex-col sm:flex-row justify-center items-center gap-4 max-w-lg mx-auto">
-                <!-- כפתור GEMS מקצועיים -->
-                <a href="#" class="w-full sm:w-auto inline-flex items-center justify-center gap-3 px-8 py-4 bg-blue-900 text-white rounded-xl hover:bg-blue-800 transition-all shadow-md hover:shadow-lg font-medium cursor-pointer">
+                <!-- כפתור GEMS מקצועיים - פותח חלון צף מעודכן -->
+                <button onclick="openProfGemsModal()" class="w-full sm:w-auto inline-flex items-center justify-center gap-3 px-8 py-4 bg-blue-900 text-white rounded-xl hover:bg-blue-800 transition-all shadow-md hover:shadow-lg font-medium cursor-pointer">
                     <span>GEMS מקצועיים</span>
                     <svg class="w-5 h-5 transform rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path>
                     </svg>
-                </a>
+                </button>
                 
                 <!-- כפתור GEMS אישיים -->
                 <a href="#" class="w-full sm:w-auto inline-flex items-center justify-center gap-3 px-8 py-4 bg-slate-900 text-white rounded-xl hover:bg-slate-800 transition-all shadow-md hover:shadow-lg font-medium cursor-pointer">
@@ -187,7 +187,7 @@
     </footer>
 
     <!-- מודל תוצרי למידה -->
-    <div id="learningModal" class="fixed inset-0 z-50 hidden bg-slate-900/80 backdrop-blur-sm items-center justify-center p-4 transition-all duration-300 overflow-y-auto">
+    <div id="learningModal" class="fixed inset-0 z-50 hidden bg-slate-900/80 backdrop-blur-sm flex items-center justify-center p-4 transition-all duration-300 overflow-y-auto">
         <div class="bg-white rounded-2xl max-w-2xl w-full my-8 overflow-hidden shadow-2xl relative border border-slate-100">
             <button onclick="closeLearningModal()" class="absolute top-4 right-4 bg-slate-100 hover:bg-slate-200 text-slate-700 rounded-full p-2 transition-colors z-10 cursor-pointer">
                 <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -204,7 +204,7 @@
     </div>
 
     <!-- מודל עבודות לליה -->
-    <div id="leyaModal" class="fixed inset-0 z-50 hidden bg-slate-900/80 backdrop-blur-sm items-center justify-center p-4 transition-all duration-300 overflow-y-auto">
+    <div id="leyaModal" class="fixed inset-0 z-50 hidden bg-slate-900/80 backdrop-blur-sm flex items-center justify-center p-4 transition-all duration-300 overflow-y-auto">
         <div class="bg-white rounded-2xl max-w-4xl w-full my-8 overflow-hidden shadow-2xl relative border border-slate-100">
             <button onclick="closeLeyaModal()" class="absolute top-4 right-4 bg-slate-100 hover:bg-slate-200 text-slate-700 rounded-full p-2 transition-colors z-10 cursor-pointer">
                 <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -254,7 +254,7 @@
     </div>
 
     <!-- מודל עבודות לגאיה -->
-    <div id="gayaModal" class="fixed inset-0 z-50 hidden bg-slate-900/80 backdrop-blur-sm items-center justify-center p-4 transition-all duration-300 overflow-y-auto">
+    <div id="gayaModal" class="fixed inset-0 z-50 hidden bg-slate-900/80 backdrop-blur-sm flex items-center justify-center p-4 transition-all duration-300 overflow-y-auto">
         <div class="bg-white rounded-2xl max-w-4xl w-full my-8 overflow-hidden shadow-2xl relative border border-slate-100">
             <button onclick="closeGayaModal()" class="absolute top-4 right-4 bg-slate-100 hover:bg-slate-200 text-slate-700 rounded-full p-2 transition-colors z-10 cursor-pointer">
                 <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -285,19 +285,228 @@
         </div>
     </div>
 
+    <!-- מודל GEMS מקצועיים - מציג את 10 הקבצים והכרטיסים המבוקשים בגריד מרשים -->
+    <div id="profGemsModal" class="fixed inset-0 z-50 hidden bg-slate-900/80 backdrop-blur-sm flex items-center justify-center p-4 transition-all duration-300 overflow-y-auto">
+        <div class="bg-white rounded-2xl max-w-5xl w-full my-8 overflow-hidden shadow-2xl relative border border-slate-100">
+            <!-- כפתור סגירה -->
+            <button onclick="closeProfGemsModal()" class="absolute top-4 right-4 bg-slate-100 hover:bg-slate-200 text-slate-700 rounded-full p-2 transition-colors z-10 cursor-pointer">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                </svg>
+            </button>
+            <div class="p-6 md:p-8">
+                <h3 class="text-2xl font-bold text-slate-900 mb-2 text-center">GEMS מקצועיים</h3>
+                <p class="text-slate-500 text-sm text-center mb-8 pb-4 border-b">כרטיסי ניווט קליניים מהירים, פרוטוקולים וסריקות מידע שימושיות</p>
+                
+                <!-- גריד של 10 כרטיסים מעוצבים -->
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 text-right max-h-[60vh] overflow-y-auto px-2" dir="rtl">
+                    
+                    <!-- כרטיס 1: זיהומים -->
+                    <div class="p-4 bg-slate-50 rounded-xl border border-slate-100 hover:border-blue-200 transition-all shadow-sm flex flex-col justify-between">
+                        <div class="flex items-start gap-3 mb-4">
+                            <div class="w-12 h-12 bg-white rounded-lg flex-shrink-0 border border-slate-200 overflow-hidden">
+                                <img src="antibiotic-qrcode (1).png" alt="זיהומים" class="w-full h-full object-cover" onerror="this.onerror=null; this.src='https://placehold.co/100x100/f1f5f9/0f172a?text=QR+זיהומים';">
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-slate-900 text-base">זיהומים ואנטיביוטיקה</h4>
+                                <p class="text-xs text-slate-500">מדריך טיפול אנטיביוטי מהיר ומדדי זיהומים קליניים.</p>
+                            </div>
+                        </div>
+                        <a href="antibiotic-qrcode (1).png" download="antibiotic-qrcode (1).png" class="inline-flex items-center justify-center gap-1.5 text-xs text-blue-900 hover:text-blue-700 font-semibold bg-white border py-2 rounded-lg transition-colors">
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path>
+                            </svg>
+                            <span>הורדת כרטיס QR</span>
+                        </a>
+                    </div>
+
+                    <!-- כרטיס 2: HIE -->
+                    <div class="p-4 bg-slate-50 rounded-xl border border-slate-100 hover:border-blue-200 transition-all shadow-sm flex flex-col justify-between">
+                        <div class="flex items-start gap-3 mb-4">
+                            <div class="w-12 h-12 bg-white rounded-lg flex-shrink-0 border border-slate-200 overflow-hidden">
+                                <img src="gemini-qr-code-snowflake (1).png" alt="HIE" class="w-full h-full object-cover" onerror="this.onerror=null; this.src='https://placehold.co/100x100/f1f5f9/0f172a?text=QR+HIE';">
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-slate-900 text-base">HIE (תשניק סביב הלידה)</h4>
+                                <p class="text-xs text-slate-500">פרוטוקול היפותרמיה קליני ומדדים לזיהוי ועקומות טיפול.</p>
+                            </div>
+                        </div>
+                        <a href="gemini-qr-code-snowflake (1).png" download="gemini-qr-code-snowflake (1).png" class="inline-flex items-center justify-center gap-1.5 text-xs text-blue-900 hover:text-blue-700 font-semibold bg-white border py-2 rounded-lg transition-colors">
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path>
+                            </svg>
+                            <span>הורדת כרטיס QR</span>
+                        </a>
+                    </div>
+
+                    <!-- כרטיס 3: קטטרים -->
+                    <div class="p-4 bg-slate-50 rounded-xl border border-slate-100 hover:border-blue-200 transition-all shadow-sm flex flex-col justify-between">
+                        <div class="flex items-start gap-3 mb-4">
+                            <div class="w-12 h-12 bg-white rounded-lg flex-shrink-0 border border-slate-200 overflow-hidden">
+                                <img src="QR_Code (1).png" alt="קטטרים" class="w-full h-full object-cover" onerror="this.onerror=null; this.src='https://placehold.co/100x100/f1f5f9/0f172a?text=QR+קטטרים';">
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-slate-900 text-base">מניעת זיהומי קטטרים</h4>
+                                <p class="text-xs text-slate-500">פרוטוקול עבודה מונע ובטיחות עבודה עם צנתרים מרכזיים.</p>
+                            </div>
+                        </div>
+                        <a href="QR_Code (1).png" download="QR_Code (1).png" class="inline-flex items-center justify-center gap-1.5 text-xs text-blue-900 hover:text-blue-700 font-semibold bg-white border py-2 rounded-lg transition-colors">
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path>
+                            </svg>
+                            <span>הורדת כרטיס QR</span>
+                        </a>
+                    </div>
+
+                    <!-- כרטיס 4: הזנה -->
+                    <div class="p-4 bg-slate-50 rounded-xl border border-slate-100 hover:border-blue-200 transition-all shadow-sm flex flex-col justify-between">
+                        <div class="flex items-start gap-3 mb-4">
+                            <div class="w-12 h-12 bg-white rounded-lg flex-shrink-0 border border-slate-200 overflow-hidden">
+                                <img src="QR_Code_with_Bottle.png" alt="הזנה" class="w-full h-full object-cover" onerror="this.onerror=null; this.src='https://placehold.co/100x100/f1f5f9/0f172a?text=QR+הזנה';">
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-slate-900 text-base">הזנה ופרוטוקול תזונה</h4>
+                                <p class="text-xs text-slate-500">חישוב רכיבי תזונה, קלוריות ונוזלים בפגיות ובמחלקות ילודים.</p>
+                            </div>
+                        </div>
+                        <a href="QR_Code_with_Bottle.png" download="QR_Code_with_Bottle.png" class="inline-flex items-center justify-center gap-1.5 text-xs text-blue-900 hover:text-blue-700 font-semibold bg-white border py-2 rounded-lg transition-colors">
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path>
+                            </svg>
+                            <span>הורדת כרטיס QR</span>
+                        </a>
+                    </div>
+
+                    <!-- כרטיס 5: NAIT -->
+                    <div class="p-4 bg-slate-50 rounded-xl border border-slate-100 hover:border-blue-200 transition-all shadow-sm flex flex-col justify-between">
+                        <div class="flex items-start gap-3 mb-4">
+                            <div class="w-12 h-12 bg-white rounded-lg flex-shrink-0 border border-slate-200 overflow-hidden">
+                                <img src="QR_with_Thrombocyte (2).pngNAIT.png" alt="NAIT" class="w-full h-full object-cover" onerror="this.onerror=null; this.src='https://placehold.co/100x100/f1f5f9/0f172a?text=QR+NAIT';">
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-slate-900 text-base">NAIT (תרומבוציטופניה)</h4>
+                                <p class="text-xs text-slate-500">מדריך לאבחון וניהול תרומבוציטופניה אלואימונית בילוד.</p>
+                            </div>
+                        </div>
+                        <a href="QR_with_Thrombocyte (2).pngNAIT.png" download="QR_with_Thrombocyte (2).pngNAIT.png" class="inline-flex items-center justify-center gap-1.5 text-xs text-blue-900 hover:text-blue-700 font-semibold bg-white border py-2 rounded-lg transition-colors">
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path>
+                            </svg>
+                            <span>הורדת כרטיס QR</span>
+                        </a>
+                    </div>
+
+                    <!-- כרטיס 6: סונרמח -->
+                    <div class="p-4 bg-slate-50 rounded-xl border border-slate-100 hover:border-blue-200 transition-all shadow-sm flex flex-col justify-between">
+                        <div class="flex items-start gap-3 mb-4">
+                            <div class="w-12 h-12 bg-white rounded-lg flex-shrink-0 border border-slate-200 overflow-hidden">
+                                <img src="qrcode (1).png" alt="סונרמח" class="w-full h-full object-cover" onerror="this.onerror=null; this.src='https://placehold.co/100x100/f1f5f9/0f172a?text=QR+סונרמח';">
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-slate-900 text-base">סונר מוח קליני</h4>
+                                <p class="text-xs text-slate-500">מדריך פענוח מהיר של ממצאי אולטרסאונד מוח בפגיה ובמחלקות ילודים.</p>
+                            </div>
+                        </div>
+                        <a href="qrcode (1).png" download="qrcode (1).png" class="inline-flex items-center justify-center gap-1.5 text-xs text-blue-900 hover:text-blue-700 font-semibold bg-white border py-2 rounded-lg transition-colors">
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path>
+                            </svg>
+                            <span>הורדת כרטיס QR</span>
+                        </a>
+                    </div>
+
+                    <!-- כרטיס 7: סאבגליאל -->
+                    <div class="p-4 bg-slate-50 rounded-xl border border-slate-100 hover:border-blue-200 transition-all shadow-sm flex flex-col justify-between">
+                        <div class="flex items-start gap-3 mb-4">
+                            <div class="w-12 h-12 bg-white rounded-lg flex-shrink-0 border border-slate-200 overflow-hidden">
+                                <img src="qrcode-baby.png" alt="סאבגליאל" class="w-full h-full object-cover" onerror="this.onerror=null; this.src='https://placehold.co/100x100/f1f5f9/0f172a?text=QR+סאבגליאל';">
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-slate-900 text-base">דימום סאבגליאלי</h4>
+                                <p class="text-xs text-slate-500">פרוטוקול מעקב וזיהוי דימומים מתחת לאפונאורוזה בילוד.</p>
+                            </div>
+                        </div>
+                        <a href="qrcode-baby.png" download="qrcode-baby.png" class="inline-flex items-center justify-center gap-1.5 text-xs text-blue-900 hover:text-blue-700 font-semibold bg-white border py-2 rounded-lg transition-colors">
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path>
+                            </svg>
+                            <span>הורדת כרטיס QR</span>
+                        </a>
+                    </div>
+
+                    <!-- כרטיס 8: היפוגליקמיה -->
+                    <div class="p-4 bg-slate-50 rounded-xl border border-slate-100 hover:border-blue-200 transition-all shadow-sm flex flex-col justify-between">
+                        <div class="flex items-start gap-3 mb-4">
+                            <div class="w-12 h-12 bg-white rounded-lg flex-shrink-0 border border-slate-200 overflow-hidden">
+                                <img src="gemini-baby-qr-code.png" alt="היפוגליקמיה" class="w-full h-full object-cover" onerror="this.onerror=null; this.src='https://placehold.co/100x100/f1f5f9/0f172a?text=QR+היפוגליקמיה';">
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-slate-900 text-base">ניהול היפוגליקמיה בילוד</h4>
+                                <p class="text-xs text-slate-500">עקומות מעקב, הגדרות ערכי סף וניהול קליני מהיר.</p>
+                            </div>
+                        </div>
+                        <a href="gemini-baby-qr-code.png" download="gemini-baby-qr-code.png" class="inline-flex items-center justify-center gap-1.5 text-xs text-blue-900 hover:text-blue-700 font-semibold bg-white border py-2 rounded-lg transition-colors">
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path>
+                            </svg>
+                            <span>הורדת כרטיס QR</span>
+                        </a>
+                    </div>
+
+                    <!-- כרטיס 9: בטיחות בטיפול תרופתי -->
+                    <div class="p-4 bg-slate-50 rounded-xl border border-slate-100 hover:border-blue-200 transition-all shadow-sm flex flex-col justify-between">
+                        <div class="flex items-start gap-3 mb-4">
+                            <div class="w-12 h-12 bg-white rounded-lg flex-shrink-0 border border-slate-200 overflow-hidden">
+                                <img src="qr-code-medicine.png" alt="בטיחות תרופתית" class="w-full h-full object-cover" onerror="this.onerror=null; this.src='https://placehold.co/100x100/f1f5f9/0f172a?text=QR+תרופות';">
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-slate-900 text-base">בטיחות בטיפול תרופתי</h4>
+                                <p class="text-xs text-slate-500">ניהול מינונים, מניעת טעויות והנחיות ניתוב ודילול מדויקות.</p>
+                            </div>
+                        </div>
+                        <a href="qr-code-medicine.png" download="qr-code-medicine.png" class="inline-flex items-center justify-center gap-1.5 text-xs text-blue-900 hover:text-blue-700 font-semibold bg-white border py-2 rounded-lg transition-colors">
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path>
+                            </svg>
+                            <span>הורדת כרטיס QR</span>
+                        </a>
+                    </div>
+
+                    <!-- כרטיס 10: פליאציה -->
+                    <div class="p-4 bg-slate-50 rounded-xl border border-slate-100 hover:border-blue-200 transition-all shadow-sm flex flex-col justify-between">
+                        <div class="flex items-start gap-3 mb-4">
+                            <div class="w-12 h-12 bg-white rounded-lg flex-shrink-0 border border-slate-200 overflow-hidden">
+                                <img src="הורדה.png" alt="פליאציה" class="w-full h-full object-cover" onerror="this.onerror=null; this.src='https://placehold.co/100x100/f1f5f9/0f172a?text=QR+פליאציה';">
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-slate-900 text-base">מדריך ופרוטוקול פליאציה</h4>
+                                <p class="text-xs text-slate-500">הנחיות ליווי וטיפול תומך וחומל (Palliative Care) בסוף חיים.</p>
+                            </div>
+                        </div>
+                        <a href="הורדה.png" download="הורדה.png" class="inline-flex items-center justify-center gap-1.5 text-xs text-blue-900 hover:text-blue-700 font-semibold bg-white border py-2 rounded-lg transition-colors">
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path>
+                            </svg>
+                            <span>הורדת כרטיס QR</span>
+                        </a>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
     <script>
         // מודל תוצרי למידה
         function openLearningModal() {
             const modal = document.getElementById('learningModal');
             modal.classList.remove('hidden');
-            modal.classList.add('flex');
             document.body.style.overflow = 'hidden';
         }
 
         function closeLearningModal() {
             const modal = document.getElementById('learningModal');
             modal.classList.add('hidden');
-            modal.classList.remove('flex');
             document.body.style.overflow = '';
         }
 
@@ -305,14 +514,12 @@
         function openLeyaModal() {
             const modal = document.getElementById('leyaModal');
             modal.classList.remove('hidden');
-            modal.classList.add('flex');
             document.body.style.overflow = 'hidden';
         }
 
         function closeLeyaModal() {
             const modal = document.getElementById('leyaModal');
             modal.classList.add('hidden');
-            modal.classList.remove('flex');
             document.body.style.overflow = '';
         }
 
@@ -320,14 +527,25 @@
         function openGayaModal() {
             const modal = document.getElementById('gayaModal');
             modal.classList.remove('hidden');
-            modal.classList.add('flex');
             document.body.style.overflow = 'hidden';
         }
 
         function closeGayaModal() {
             const modal = document.getElementById('gayaModal');
             modal.classList.add('hidden');
-            modal.classList.remove('flex');
+            document.body.style.overflow = '';
+        }
+
+        // מודל GEMS מקצועיים - פתיחה וסגירה
+        function openProfGemsModal() {
+            const modal = document.getElementById('profGemsModal');
+            modal.classList.remove('hidden');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeProfGemsModal() {
+            const modal = document.getElementById('profGemsModal');
+            modal.classList.add('hidden');
             document.body.style.overflow = '';
         }
 
@@ -336,6 +554,7 @@
             const learningModal = document.getElementById('learningModal');
             const leyaModal = document.getElementById('leyaModal');
             const gayaModal = document.getElementById('gayaModal');
+            const profGemsModal = document.getElementById('profGemsModal');
             
             if (event.target === learningModal) {
                 closeLearningModal();
@@ -345,6 +564,9 @@
             }
             if (event.target === gayaModal) {
                 closeGayaModal();
+            }
+            if (event.target === profGemsModal) {
+                closeProfGemsModal();
             }
         });
     </script>
