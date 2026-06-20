@@ -54,14 +54,14 @@
             <h2 class="text-3xl font-bold text-blue-900 mb-8 border-r-4 border-blue-600 pr-4 inline-block">מי אני</h2>
             <div class="text-right w-full mb-12">
                 <p class="text-lg leading-relaxed text-slate-700 mb-6">
-                    בעלת דוקטורט (PhD) המשלב מחקר קליני WITH עשייה בשטח. לאורך שנותיי בטיפול נמרץ פגים, פיתחתי מומחיות ייחודית בטיפול פליאטיבי בראשית החיים – תחום המשלב מיומנות רפואית דייקנית עם ליווי הוליסטי של המטופל ומשפחתו.
+                    בעלת דוקטורט (PhD) המשלב מחקר קליני WITH עשייה בשטח. לאורך שנותיי בטיפול נמרץ פגים, פיתחתי מומחיות ייחודית בטיפול פליאטיבי בראשית החיים – תחום המשלב מיומנות רפואית דייקנית WITH ליווי הוליסטי של המטופל ומשפחתו.
                 </p>
                 <p class="text-lg leading-relaxed text-slate-700">
                     עבודתי מתמקדת בשילוב בין מדע לפרקטיקה. אני מאמינה ששימוש בטכנולוגיה, ניתוח נתונים מבוסס ראיות ופיתוח כלים קליניים חכמים הם המפתח לשיפור איכות הטיפול ומקסום התוצאות הרפואיות בתינוקות בסיכון.
                 </p>
             </div>
-            <!-- תמונת הפרופיל שלך - ממוקמת כעת מתחת לטקסט -->
-            <div class="relative w-64 h-64 sm:w-72 sm:h-72 md:w-80 md:h-80 lg:w-96 lg:h-96">
+            <!-- תמונת הפרופיל שלך - ממוקמת כעת מתחת לטקסט (בגודל מוקטן) -->
+            <div class="relative w-48 h-48 sm:w-52 sm:h-52 md:w-56 md:h-56">
                 <!-- אלמנט רקע דקורטיבי לקבלת מראה תלת-ממדי עדין ויוקרתי -->
                 <div class="absolute inset-0 bg-blue-600/10 rounded-3xl transform rotate-3 scale-105"></div>
                 <!-- התמונה המקצועית -->
@@ -97,11 +97,19 @@
     <section id="portfolio" class="py-24 bg-slate-50 px-6 border-t border-slate-100">
         <div class="max-w-3xl mx-auto text-center">
             <h2 class="text-3xl font-bold text-blue-900 mb-8">עבודות אישיות</h2>
-            <!-- להחלפת הקישור: החליפי את ה-href בקישור לתיקיית Google Drive של העבודות האישיות -->
-            <a href="https://drive.google.com" target="_blank" class="inline-flex items-center gap-3 px-8 py-4 bg-blue-900 text-white rounded-xl hover:bg-blue-800 transition-all shadow-md hover:shadow-lg font-medium">
-                <span>לצפייה בתיק העבודות האישיות</span>
-                <svg class="w-5 h-5 transform rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
-            </a>
+            <div class="flex flex-col sm:flex-row justify-center items-center gap-4">
+                <!-- הפעלת חלון צף לעבודות של ליה -->
+                <button onclick="openLeyaModal()" class="w-full sm:w-auto inline-flex items-center justify-center gap-3 px-8 py-4 bg-blue-900 text-white rounded-xl hover:bg-blue-800 transition-all shadow-md hover:shadow-lg font-medium cursor-pointer">
+                    <span>עבודות לליה</span>
+                    <svg class="w-5 h-5 transform rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
+                </button>
+                
+                <!-- להחלפת הקישור: החליפי את ה-href בקישור לתיקיית Google Drive של העבודות לגאיה -->
+                <a href="https://drive.google.com" target="_blank" class="w-full sm:w-auto inline-flex items-center justify-center gap-3 px-8 py-4 bg-slate-900 text-white rounded-xl hover:bg-slate-800 transition-all shadow-md hover:shadow-lg font-medium">
+                    <span>עבודות לגאיה</span>
+                    <svg class="w-5 h-5 transform rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
+                </a>
+            </div>
         </div>
     </section>
 
@@ -163,6 +171,69 @@
         </div>
     </div>
 
+    <!-- מודל (חלון צף) מודרני מורחב להצגת עבודות לליה -->
+    <div id="leyaModal" class="fixed inset-0 z-50 hidden bg-slate-900/80 backdrop-blur-sm flex items-center justify-center p-4 transition-all duration-300 overflow-y-auto">
+        <div class="bg-white rounded-2xl max-w-4xl w-full my-8 overflow-hidden shadow-2xl relative border border-slate-100">
+            <!-- כפתור סגירה מהיר -->
+            <button onclick="closeLeyaModal()" class="absolute top-4 right-4 bg-slate-100 hover:bg-slate-200 text-slate-700 rounded-full p-2 transition-colors z-10 cursor-pointer">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                </svg>
+            </button>
+            
+            <div class="p-8">
+                <h3 class="text-2xl font-bold text-blue-900 mb-6 text-center border-b pb-4">עבודות לליה</h3>
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8 text-right" dir="rtl">
+                    <!-- טור 1: קבצי PDF / ספרים -->
+                    <div>
+                        <h4 class="text-lg font-semibold text-slate-800 mb-4 flex items-center gap-2">
+                            <span class="w-2.5 h-2.5 rounded-full bg-blue-600 inline-block"></span>
+                            ספרים ומסמכים (PDF)
+                        </h4>
+                        <div class="space-y-4">
+                            <!-- ספר 1 -->
+                            <div class="p-4 bg-slate-50 rounded-xl border border-slate-100 hover:border-blue-200 transition-colors flex flex-col justify-between h-32">
+                                <span class="font-medium text-slate-900 block text-base">ליה והסוד של כיתה א</span>
+                                <a href="ליה והסוד של כיתה א.pdf" download="ליה והסוד של כיתה א.pdf" target="_blank" class="self-start inline-flex items-center gap-1.5 text-sm text-blue-600 hover:text-blue-800 font-medium">
+                                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path></svg>
+                                    <span>להורדה וקריאה</span>
+                                </a>
+                            </div>
+                            
+                            <!-- ספר 2 -->
+                            <div class="p-4 bg-slate-50 rounded-xl border border-slate-100 hover:border-blue-200 transition-colors flex flex-col justify-between h-32">
+                                <span class="font-medium text-slate-900 block text-base">ליה וקסם כיתה א'</span>
+                                <a href="ליה וקסם כיתה א'.pdf" download="ליה וקסם כיתה א'.pdf" target="_blank" class="self-start inline-flex items-center gap-1.5 text-sm text-blue-600 hover:text-blue-800 font-medium">
+                                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path></svg>
+                                    <span>להורדה וקריאה</span>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- טור 2: איורים ויצירות (תמונות) -->
+                    <div>
+                        <h4 class="text-lg font-semibold text-slate-800 mb-4 flex items-center gap-2">
+                            <span class="w-2.5 h-2.5 rounded-full bg-emerald-500 inline-block"></span>
+                            איורים ויצירות
+                        </h4>
+                        <div class="grid grid-cols-2 gap-4">
+                            <!-- תמונה 1 -->
+                            <div class="group relative bg-slate-50 rounded-xl overflow-hidden border border-slate-100 aspect-square flex items-center justify-center">
+                                <img src="Gemini_Generated_Image_tkd5xstkd5xstkd5.png" alt="איור 1 של ליה" class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105" onerror="this.onerror=null; this.src='https://placehold.co/300x300/f1f5f9/0f172a?text=Image+1';">
+                            </div>
+                            <!-- תמונה 2 -->
+                            <div class="group relative bg-slate-50 rounded-xl overflow-hidden border border-slate-100 aspect-square flex items-center justify-center">
+                                <img src="Gemini_Generated_Image_67wcy167wcy167wc.png" alt="איור 2 של ליה" class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105" onerror="this.onerror=null; this.src='https://placehold.co/300x300/f1f5f9/0f172a?text=Image+2';">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <!-- סקריפט לשליטה במודל -->
     <script>
         function openModal() {
@@ -177,11 +248,27 @@
             document.body.style.overflow = ''; // החזרת הגלילה
         }
 
-        // סגירת החלון בלחיצה מחוץ לתוכן שלו
+        function openLeyaModal() {
+            const modal = document.getElementById('leyaModal');
+            modal.classList.remove('hidden');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeLeyaModal() {
+            const modal = document.getElementById('leyaModal');
+            modal.classList.add('hidden');
+            document.body.style.overflow = '';
+        }
+
+        // סגירת החלונות בלחיצה מחוץ לתוכן שלהם
         window.addEventListener('click', function(event) {
-            const modal = document.getElementById('learningModal');
-            if (event.target === modal) {
+            const learningModal = document.getElementById('learningModal');
+            const leyaModal = document.getElementById('leyaModal');
+            if (event.target === learningModal) {
                 closeModal();
+            }
+            if (event.target === leyaModal) {
+                closeLeyaModal();
             }
         });
     </script>
