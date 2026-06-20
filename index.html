@@ -211,7 +211,7 @@
         </div>
     </div>
 
-    <!-- מודל עבודות לגאיה -->
+    <!-- מודל עבודות לגאיה - מעודכן עם הקבצים המבוקשים -->
     <div id="gayaModal" class="fixed inset-0 z-50 hidden bg-slate-900/80 backdrop-blur-sm flex items-center justify-center p-4 transition-all duration-300 overflow-y-auto">
         <div class="bg-white rounded-2xl max-w-4xl w-full my-8 overflow-hidden shadow-2xl relative border border-slate-100">
             <button onclick="closeGayaModal()" class="absolute top-4 right-4 bg-slate-100 hover:bg-slate-200 text-slate-700 rounded-full p-2 transition-colors z-10 cursor-pointer">
@@ -221,51 +221,24 @@
             </button>
             <div class="p-8">
                 <h3 class="text-2xl font-bold text-slate-900 mb-6 text-center border-b pb-4">עבודות לגאיה</h3>
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-8 text-right" dir="rtl">
-                    <!-- טור 1: קבצי PDF / ספרים וסרטונים -->
-                    <div class="space-y-6">
-                        <div>
-                            <h4 class="text-lg font-semibold text-slate-800 mb-4 flex items-center gap-2">
-                                <span class="w-2.5 h-2.5 rounded-full bg-blue-600 inline-block"></span>
-                                ספרים ומסמכים (PDF)
-                            </h4>
-                            <div class="p-4 bg-slate-50 rounded-xl border border-slate-100 hover:border-blue-200 transition-colors flex flex-col justify-between h-32">
-                                <span class="font-medium text-slate-900 block text-base">האצבעות של גאיה יוצאות להרפתקאה (1).pdf</span>
-                                <a href="האצבעות של גאיה יוצאות להרפתקאה (1).pdf" download="האצבעות של גאיה יוצאות להרפתקאה (1).pdf" class="self-start inline-flex items-center gap-1.5 text-sm text-blue-600 hover:text-blue-800 font-medium">
-                                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path>
-                                    </svg>
-                                    <span>להורדה וקריאה</span>
-                                </a>
-                            </div>
-                        </div>
-
-                        <div>
-                            <h4 class="text-lg font-semibold text-slate-800 mb-4 flex items-center gap-2">
-                                <span class="w-2.5 h-2.5 rounded-full bg-red-500 inline-block"></span>
-                                סרטונים ויצירות בתנועה
-                            </h4>
-                            <div class="p-4 bg-slate-50 rounded-xl border border-slate-100 overflow-hidden">
-                                <video controls class="w-full rounded-lg shadow-sm bg-black max-h-48">
-                                    <source src="הבחירה_הקסומה_של_גאיה.mp4" type="video/mp4">
-                                    הדפדפן שלך אינו תומך בנגן הוידאו.
-                                </video>
-                                <span class="text-xs text-slate-500 block mt-2 text-center">הבחירה_הקסומה_של_גאיה.mp4</span>
-                            </div>
-                        </div>
-                    </div>
+                
+                <div class="space-y-6 text-right" dir="rtl">
+                    <h4 class="text-lg font-semibold text-slate-800 flex items-center gap-2 mb-4">
+                        <span class="w-2.5 h-2.5 rounded-full bg-indigo-500 inline-block"></span>
+                        איורים ויצירות
+                    </h4>
                     
-                    <!-- טור 2: איורים ויצירות (תמונות) -->
-                    <div>
-                        <h4 class="text-lg font-semibold text-slate-800 mb-4 flex items-center gap-2">
-                            <span class="w-2.5 h-2.5 rounded-full bg-emerald-500 inline-block"></span>
-                            איורים ויצירות
-                        </h4>
-                        <div class="group relative bg-slate-50 rounded-xl overflow-hidden border border-slate-100 aspect-square flex items-center justify-center">
-                            <img src="Gemini_Generated_Image_mjocr5mjocr5mjoc.png" alt="איור של גאיה" class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105" onerror="this.onerror=null; this.src='https://placehold.co/400x400/f1f5f9/0f172a?text=Gemini_Generated_Image_mjocr5mjocr5mjoc.png';">
+                    <!-- גלריית איורים של גאיה -->
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div class="group relative bg-slate-50 rounded-xl overflow-hidden border border-slate-100 aspect-video md:aspect-square flex items-center justify-center shadow-sm">
+                            <img src="Gemini_Generated_Image_mjocr5mjocr5mjoc.png" alt="איור גאיה 1" class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105" onerror="this.onerror=null; this.src='https://placehold.co/400x400/f1f5f9/0f172a?text=Gemini_Generated_Image_mjocr5mjocr5mjoc.png';">
+                        </div>
+                        <div class="group relative bg-slate-50 rounded-xl overflow-hidden border border-slate-100 aspect-video md:aspect-square flex items-center justify-center shadow-sm">
+                            <img src="5677210b-166d-47af-8196-0cdae8ecb792.jpg" alt="איור גאיה 2" class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105" onerror="this.onerror=null; this.src='https://placehold.co/400x400/f1f5f9/0f172a?text=5677210b-166d-47af-8196-0cdae8ecb792.jpg';">
                         </div>
                     </div>
                 </div>
+
             </div>
         </div>
     </div>
