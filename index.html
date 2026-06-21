@@ -24,7 +24,7 @@
             </div>
             <nav class="hidden md:flex items-center gap-8 text-sm font-medium text-slate-600">
                 <a href="#about" class="hover:text-blue-950 transition-colors">מי אני</a>
-                <a href="#cv" class="hover:text-blue-950 transition-colors">קורות חיים</a>
+                <a href="#cv" class="hover:text-blue-950 transition-colors">קובץ קורות חיים</a>
                 <a href="#learning" class="hover:text-blue-950 transition-colors">תוצרי למידה</a>
                 <a href="#developments" class="hover:text-blue-950 transition-colors">פיתוחים מקצועיים שונים</a>
                 <a href="#portfolio" class="hover:text-blue-950 transition-colors">עבודות אישיות</a>
@@ -194,9 +194,10 @@
         <p>© 2026 ד"ר סופי דומבה דורון. כל הזכויות שמורות.</p>
     </footer>
 
-    <!-- מודל תוצרי למידה -->
+    <!-- מודל תוצרי למידה - מציג את כל קבצי ההורדה והתצוגה בצורה מאורגנת -->
     <div id="learningModal" class="fixed inset-0 z-50 hidden bg-slate-900/80 backdrop-blur-sm flex items-center justify-center p-4 transition-all duration-300 overflow-y-auto">
-        <div class="bg-white rounded-2xl max-w-2xl w-full my-8 overflow-hidden shadow-2xl relative border border-slate-100">
+        <div class="bg-white rounded-2xl max-w-4xl w-full my-8 overflow-hidden shadow-2xl relative border border-slate-100">
+            <!-- כפתור סגירה -->
             <button onclick="closeLearningModal()" class="absolute top-4 right-4 bg-slate-100 hover:bg-slate-200 text-slate-700 rounded-full p-2 transition-colors z-10 cursor-pointer">
                 <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
@@ -204,8 +205,54 @@
             </button>
             <div class="p-8">
                 <h3 class="text-2xl font-bold text-slate-900 mb-6 text-center border-b pb-4">תוצרי למידה</h3>
-                <div class="flex justify-center">
-                    <img src="QR_with_Thrombocyte (2).pngNAIT.png" alt="תוצר למידה" class="max-w-full h-auto rounded-lg shadow-md" onerror="this.onerror=null; this.src='https://placehold.co/600x400/f1f5f9/0f172a?text=QR_with_Thrombocyte+(2).pngNAIT.png';">
+                
+                <!-- גריד רספונסיבי מותאם ל-3 עמודות/כרטיסים -->
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 text-right" dir="rtl">
+                    <!-- כרטיס 1: סט הוראות לעיצוב מצגת ב-NBLM -->
+                    <div class="p-5 bg-slate-50 rounded-xl border border-slate-100 hover:border-blue-200 transition-colors flex flex-col justify-between h-44 shadow-sm">
+                        <div>
+                            <span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-xs font-semibold bg-blue-50 text-blue-800 mb-2">מסמכים ומדריכים</span>
+                            <span class="font-bold text-slate-900 block text-base mb-1">הוראות לעיצוב מצגת ב- NBLM</span>
+                            <p class="text-xs text-slate-500">סט הוראות קליני ומקצועי לעיצוב והעברת מסרים אפקטיבית במצגות למידה.</p>
+                        </div>
+                        <a href="סט הוראות לעיצוב מצגת ב- NBLM.docx" download="סט הוראות לעיצוב מצגת ב- NBLM.docx" class="self-start inline-flex items-center gap-1.5 text-sm text-blue-600 hover:text-blue-800 font-medium mt-3">
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path>
+                            </svg>
+                            <span>להורדת קובץ (DOCX)</span>
+                        </a>
+                    </div>
+
+                    <!-- כרטיס 2: הזנה למפגש פורום מחקר -->
+                    <div class="p-5 bg-slate-50 rounded-xl border border-slate-100 hover:border-emerald-200 transition-colors flex flex-col justify-between h-44 shadow-sm">
+                        <div>
+                            <span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-xs font-semibold bg-emerald-50 text-emerald-800 mb-2">תוצרים ויזואליים</span>
+                            <span class="font-bold text-slate-900 block text-base mb-1">הזמנה למפגש פורום מחקר</span>
+                            <p class="text-xs text-slate-500">כרזת הזמנה והנחיות למפגשי פורום מחקר קליני מקצועי.</p>
+                        </div>
+                        <a href="הזנה למפגש פורום מחקר.png" target="_blank" class="self-start inline-flex items-center gap-1.5 text-sm text-emerald-600 hover:text-emerald-800 font-medium mt-3">
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path>
+                            </svg>
+                            <span>פתיחה והורדת תמונה</span>
+                        </a>
+                    </div>
+
+                    <!-- כרטיס 3: מחברת למידה אינטראקטיבית ב-NotebookLM -->
+                    <div class="p-5 bg-purple-50 rounded-xl border border-purple-100 hover:border-purple-200 transition-colors flex flex-col justify-between h-44 shadow-sm">
+                        <div>
+                            <span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-xs font-semibold bg-purple-100 text-purple-800 mb-2">למידה מבוססת AI</span>
+                            <span class="font-bold text-slate-900 block text-base mb-1">מחברת למידה אינטראקטיבית</span>
+                            <p class="text-xs text-slate-500 font-light">גישה ישירה למחברת חכמה ב-NotebookLM לניתוח וסיכום תכנים מקצועיים בזמן אמת.</p>
+                        </div>
+                        <!-- קישור אל NotebookLM: עודכן לקישור השיתוף הישיר שלך -->
+                        <a href="https://notebooklm.google.com/notebook/93de3691-8dc2-40db-a9e9-1e6bdfeb8e29/preview" target="_blank" class="self-start inline-flex items-center gap-1.5 text-sm text-purple-700 hover:text-purple-900 font-bold mt-3">
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path>
+                            </svg>
+                            <span>כניסה למחברת ב-NotebookLM</span>
+                        </a>
+                    </div>
                 </div>
             </div>
         </div>
