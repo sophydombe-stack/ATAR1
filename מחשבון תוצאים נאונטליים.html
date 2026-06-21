@@ -1,0 +1,502 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>מחשבון תוצאי פגים לאומי 2023 - מבוסס נתוני אמת</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Assistant:wght@300;400;600;700;800&display=swap');
+        body {
+            font-family: 'Assistant', sans-serif;
+        }
+    </style>
+</head>
+<body class="bg-slate-50 text-slate-800 p-4 md:p-8">
+
+    <!-- תיבת התראות צפה (Custom Toast) -->
+    <div id="toast" class="fixed bottom-5 left-5 bg-slate-900 text-white px-6 py-3 rounded-xl shadow-2xl z-50 text-sm font-semibold hidden transition-all duration-300 transform translate-y-2 opacity-0"></div>
+
+    <div class="max-w-5xl mx-auto bg-white p-6 md:p-8 rounded-2xl shadow-xl border border-slate-200">
+        <!-- כותרת ראשית ומקור הנתונים -->
+        <div class="border-b border-slate-200 pb-6 mb-8">
+            <h1 class="text-3xl font-extrabold text-slate-900 mb-2">מחשבון הערכת תוצאי פגים לאומי 2023</h1>
+            <p class="text-sm text-slate-500">
+                כלי קליני ומחקרי המבוסס על נתוני האמת של <span class="font-semibold">Israel Neonatal Network (שנת 2023)</span>.
+                הנתונים משקפים מעקב לאומי מלא אחר פגים במשקל לידה נמוך מאוד (1,500 גרם ופחות) או שבועות היריון 22 עד 31+.
+            </p>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
+            
+            <!-- אזור קלט - שדות בחירה -->
+            <div class="lg:col-span-5 bg-slate-100 p-6 rounded-xl border border-slate-200 h-fit">
+                <h2 class="text-xl font-bold text-slate-800 mb-6 border-b pb-2">נתוני היילוד וההיריון</h2>
+                
+                <div class="space-y-5">
+                    <!-- שבוע היריון -->
+                    <div>
+                        <label class="block text-sm font-semibold text-slate-700 mb-1.5">שבוע היריון בלידה</label>
+                        <select id="gestation" class="w-full p-3 bg-white border border-slate-300 rounded-lg shadow-sm focus:ring-2 focus:ring-blue-500 focus:outline-none font-medium text-slate-800" onchange="updateWeightOptions()">
+                            <option value="22">22</option>
+                            <option value="23">23</option>
+                            <option value="24" selected>24</option>
+                            <option value="25">25</option>
+                            <option value="26">26</option>
+                            <option value="27">27</option>
+                            <option value="28">28</option>
+                            <option value="29">29</option>
+                            <option value="30">30</option>
+                            <option value="31+">31 ומעלה</option>
+                        </select>
+                    </div>
+
+                    <!-- משקל לידה -->
+                    <div>
+                        <label class="block text-sm font-semibold text-slate-700 mb-1.5">משקל לידה (גרם)</label>
+                        <select id="weight" class="w-full p-3 bg-white border border-slate-300 rounded-lg shadow-sm focus:ring-2 focus:ring-blue-500 focus:outline-none font-medium text-slate-800">
+                            <!-- האפשרויות יתעדכנו דינמית לפי השבוע -->
+                        </select>
+                    </div>
+
+                    <!-- מין -->
+                    <div>
+                        <label class="block text-sm font-semibold text-slate-700 mb-1.5">מין היילוד</label>
+                        <div class="grid grid-cols-2 gap-3">
+                            <button type="button" id="btn-male" onclick="setGender('male')" class="py-3 px-4 rounded-lg font-semibold border-2 border-blue-600 bg-blue-50 text-blue-700 transition">זכר</button>
+                            <button type="button" id="btn-female" onclick="setGender('female')" class="py-3 px-4 rounded-lg font-semibold border border-slate-300 bg-white hover:bg-slate-50 transition">נקבה</button>
+                        </div>
+                    </div>
+
+                    <!-- סטרואידים טרום לידתיים -->
+                    <div>
+                        <label class="block text-sm font-semibold text-slate-700 mb-1.5">טיפול בסטרואידים טרום לידתיים (מלא או חלקי)</label>
+                        <div class="grid grid-cols-2 gap-3">
+                            <button type="button" id="btn-steroids-yes" onclick="setSteroids('yes')" class="py-3 px-4 rounded-lg font-semibold border-2 border-blue-600 bg-blue-50 text-blue-700 transition">כן (ניתן)</button>
+                            <button type="button" id="btn-steroids-no" onclick="setSteroids('no')" class="py-3 px-4 rounded-lg font-semibold border border-slate-300 bg-white hover:bg-slate-50 transition">לא (לא ניתן)</button>
+                        </div>
+                    </div>
+
+                    <!-- היריון מרובה -->
+                    <div>
+                        <label class="block text-sm font-semibold text-slate-700 mb-1.5">ריבוי עוברים</label>
+                        <div class="grid grid-cols-2 gap-3">
+                            <button type="button" id="btn-multiple-no" onclick="setMultiple('no')" class="py-3 px-4 rounded-lg font-semibold border-2 border-blue-600 bg-blue-50 text-blue-700 transition">עובר יחיד</button>
+                            <button type="button" id="btn-multiple-yes" onclick="setMultiple('yes')" class="py-3 px-4 rounded-lg font-semibold border border-slate-300 bg-white hover:bg-slate-50 transition">היריון מרובה</button>
+                        </div>
+                    </div>
+                </div>
+
+                <button onclick="performCalculation()" class="w-full mt-8 bg-blue-800 text-white py-4 rounded-xl font-bold text-lg hover:bg-blue-900 transition-all shadow-md hover:shadow-lg focus:outline-none">
+                    חשב תוצאים קליניים
+                </button>
+            </div>
+
+            <!-- אזור פלט - תוצאות -->
+            <div class="lg:col-span-7 space-y-6">
+                
+                <!-- כרטיס ברירת מחדל לפני חישוב -->
+                <div id="no-result-placeholder" class="h-full flex flex-col items-center justify-center text-center p-8 border-2 border-dashed border-slate-300 rounded-xl bg-slate-50">
+                    <svg class="w-16 h-16 text-slate-400 mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path>
+                    </svg>
+                    <h3 class="text-xl font-bold text-slate-700 mb-2">טרם חושבו תוצאים</h3>
+                    <p class="text-sm text-slate-500 max-w-sm">הזיני את נתוני הפג/ה מצד ימין ולחצי על "חשב תוצאים קליניים" כדי להציג את פילוח נתוני האמת הלאומיים.</p>
+                </div>
+
+                <!-- כרטיסי תוצאה (מוסתרים כברירת מחדל) -->
+                <div id="results-container" class="hidden space-y-6">
+                    
+                    <!-- מדד הישרדות משולב -->
+                    <div class="bg-white p-6 rounded-xl border border-slate-200 shadow-sm">
+                        <h3 class="text-xl font-bold text-slate-900 mb-4 flex items-center gap-2">
+                            <span class="inline-block w-3 h-6 bg-blue-800 rounded-full"></span>
+                            סיכויי הישרדות משוערים למועד השחרור
+                        </h3>
+                        
+                        <div class="grid grid-cols-1 md:grid-cols-12 gap-6 items-center">
+                            <!-- עיגול אחוזי הישרדות משולב -->
+                            <div class="md:col-span-5 flex flex-col items-center justify-center">
+                                <div class="relative w-40 h-40 flex items-center justify-center">
+                                    <svg class="w-full h-full transform -rotate-90" viewBox="0 0 100 100">
+                                        <circle class="text-slate-200" stroke-width="8" stroke="currentColor" fill="transparent" r="42" cx="50" cy="50" />
+                                        <circle id="survival-progress-bar" class="text-emerald-500 transition-all duration-1000 ease-out" stroke-width="8" stroke-dasharray="263.89" stroke-dashoffset="263.89" stroke-linecap="round" stroke="currentColor" fill="transparent" r="42" cx="50" cy="50" />
+                                    </svg>
+                                    <span id="survival-percentage" class="absolute text-3xl font-extrabold text-slate-900">0.0%</span>
+                                </div>
+                                <span class="text-xs font-semibold text-slate-500 mt-2">מודל משולב מותאם אישית</span>
+                            </div>
+
+                            <!-- השוואה לנתוני הבסיס של הדו"ח -->
+                            <div class="md:col-span-7 space-y-3.5">
+                                <div class="p-3 bg-slate-50 rounded-lg border border-slate-100">
+                                    <div class="flex justify-between text-sm mb-1">
+                                        <span class="text-slate-600 font-medium">הישרדות בסיסית לשבוע ומשקל (טבלה א.4):</span>
+                                        <span id="base-survival-val" class="font-bold text-slate-900">0%</span>
+                                    </div>
+                                    <div class="text-xs text-slate-500" id="base-survival-ref">N=0</div>
+                                </div>
+
+                                <div class="p-3 bg-slate-50 rounded-lg border border-slate-100">
+                                    <div class="flex justify-between text-sm mb-1">
+                                        <span class="text-slate-600 font-medium">הישרדות לפי שבוע היריון בדו"ח:</span>
+                                        <span id="weekly-survival-val" class="font-bold text-slate-900">0%</span>
+                                    </div>
+                                    <div class="text-xs text-slate-500" id="weekly-survival-ref">N=0</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- כרטיס תחלואה וסיבוכים בקרב שורדים -->
+                    <div class="bg-white p-6 rounded-xl border border-slate-200 shadow-sm">
+                        <h3 class="text-xl font-bold text-slate-900 mb-2 flex items-center gap-2">
+                            <span class="inline-block w-3 h-6 bg-red-600 rounded-full"></span>
+                            שיעורי תחלואה וסיבוכים עיקריים בקרב השורדים
+                        </h3>
+                        <p class="text-xs text-slate-500 mb-6 border-b pb-2">מבוסס על שכיחות הסיבוכים בקרב תינוקות ששרדו לפחות 28 ימים או עד השחרור עבור שבוע ההיריון שנבחר (טבלה א.10).</p>
+                        
+                        <div id="morbidity-bars" class="space-y-4">
+                            <!-- הברים של התחלואה יתרנדרו כאן דינמית -->
+                        </div>
+                    </div>
+
+                    <!-- מקורות וסמכות קלינית -->
+                    <div class="bg-blue-50 p-4 rounded-xl border border-blue-200 text-xs text-blue-900 space-y-2">
+                        <p class="font-bold">הערה קלינית למחקר וייעוץ פליאטיבי:</p>
+                        <p>הערכים המוצגים מבוססים על נתוני עבר היסטוריים ואינם מהווים הבטחה או ניבוי ודאי למטופל ספציפי. החלטות קליניות והחלטות על סוג הטיפול (Comfort Care לעומת Active Management) משפיעות משמעותית על שיעורי ההישרדות המדווחים בשבועות הקיצון (שבועות 22-23).</p>
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+
+        <!-- תחתית המחשבון: מקור נתונים וכפתור הורדה דיסקרטי -->
+        <div class="flex flex-col sm:flex-row justify-between items-center border-t border-slate-200 pt-6 mt-8 gap-4">
+            <p class="text-xs text-slate-400">מקור: Israel Neonatal Network, דוח התפלגויות לאומי 2023.</p>
+            <button onclick="downloadSelf()" class="text-xs font-semibold text-blue-700 hover:text-blue-900 flex items-center gap-1.5 bg-blue-50 hover:bg-blue-100 transition-colors py-2 px-3 rounded-lg border border-blue-200">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path>
+                </svg>
+                שמירת המחשבון כקובץ HTML להפעלה מקומית
+            </button>
+        </div>
+    </div>
+
+    <script>
+        // מין נבחר, סטרואידים ומרובה
+        let currentGender = 'male';
+        let currentSteroids = 'yes';
+        let currentMultiple = 'no';
+
+        // 1. טבלה א.4 - שיעורי הישרדות לפי שבוע היריון וקבוצת משקל לידה (נתוני אמת 2023)
+        const rawSurvivalData = {
+            "22": {
+                "<500": [0.0, "0/3"],
+                "500-750": [0.0, "0/14"],
+                "751-1000": [0.0, "0/0"],
+                "1001-1250": [0.0, "0/0"],
+                "1251-1500": [0.0, "0/0"],
+                "overall": [0.0, "0/17"]
+            },
+            "23": {
+                "<500": [0.0, "0/5"],
+                "500-750": [22.9, "11/48"],
+                "751-1000": [33.3, "1/3"],
+                "1001-1250": [0.0, "0/0"],
+                "1251-1500": [0.0, "0/0"],
+                "overall": [21.4, "12/56"]
+            },
+            "24": {
+                "<500": [20.0, "1/5"],
+                "500-750": [45.1, "37/82"],
+                "751-1000": [50.0, "4/8"],
+                "1001-1250": [0.0, "0/0"],
+                "1251-1500": [0.0, "0/0"],
+                "overall": [44.2, "42/95"]
+            },
+            "25": {
+                "<500": [0.0, "0/1"],
+                "500-750": [74.0, "54/73"],
+                "751-1000": [76.2, "16/21"],
+                "1001-1250": [0.0, "0/1"],
+                "1251-1500": [0.0, "0/0"],
+                "overall": [73.7, "70/95"]
+            },
+            "26": {
+                "500-750": [73.1, "19/26"],
+                "751-1000": [86.8, "59/68"],
+                "1001-1250": [80.0, "4/5"],
+                "1251-1500": [0.0, "0/0"],
+                "overall": [83.0, "82/99"]
+            },
+            "27": {
+                "500-750": [69.2, "9/13"],
+                "751-1000": [91.9, "68/74"],
+                "1001-1250": [92.0, "23/25"],
+                "1251-1500": [0.0, "0/0"],
+                "overall": [89.3, "100/112"]
+            },
+            "28": {
+                "500-750": [100.0, "4/4"],
+                "751-1000": [96.0, "48/50"],
+                "1001-1250": [94.7, "72/76"],
+                "1251-1500": [100.0, "9/9"],
+                "overall": [95.7, "133/139"]
+            },
+            "29": {
+                "751-1000": [92.3, "12/13"],
+                "1001-1250": [96.9, "94/97"],
+                "1251-1500": [98.4, "60/61"],
+                "overall": [97.1, "166/171"]
+            },
+            "30": {
+                "751-1000": [100.0, "4/4"],
+                "1001-1250": [96.9, "62/64"],
+                "1251-1500": [98.1, "103/105"],
+                "overall": [97.7, "169/173"]
+            },
+            "31+": {
+                "500-750": [100.0, "1/1"],
+                "751-1000": [50.0, "1/2"],
+                "1001-1250": [96.9, "31/32"],
+                "1251-1500": [99.2, "124/125"],
+                "overall": [98.8, "157/160"]
+            }
+        };
+
+        // 2. טבלה א.10 - שיעור סיבוכים עיקריים בקרב השורדים (%)
+        const morbidityData = {
+            "22": { ivh: 0, pvl: 0, nec: 0, bpd: 0, rop: 0, sepsis: 0 },
+            "23": { ivh: 25.0, pvl: 0.0, nec: 16.7, bpd: 58.3, rop: 41.7, sepsis: 58.3 },
+            "24": { ivh: 21.4, pvl: 7.1, nec: 9.5, bpd: 63.4, rop: 22.0, sepsis: 50.0 },
+            "25": { ivh: 17.1, pvl: 5.7, nec: 7.1, bpd: 42.6, rop: 10.3, sepsis: 31.4 },
+            "26": { ivh: 12.2, pvl: 4.9, nec: 4.9, bpd: 22.2, rop: 4.9, sepsis: 23.2 },
+            "27": { ivh: 4.0, pvl: 2.0, nec: 2.0, bpd: 15.2, rop: 0.0, sepsis: 13.0 },
+            "28": { ivh: 1.5, pvl: 2.3, nec: 1.5, bpd: 8.3, rop: 0.0, sepsis: 6.8 },
+            "29": { ivh: 2.4, pvl: 2.4, nec: 1.2, bpd: 4.2, rop: 0.0, sepsis: 4.2 },
+            "30": { ivh: 0.6, pvl: 2.4, nec: 0.6, bpd: 1.2, rop: 0.0, sepsis: 3.0 },
+            "31+": { ivh: 1.3, pvl: 1.9, nec: 0.0, bpd: 0.6, rop: 0.0, sepsis: 0.6 }
+        };
+
+        // 3. יחסי סיכויים (Odds Ratios) מתוך טבלאות 15, 16, 17 לאינטגרציה רב-משתנית
+        const adjustments = {
+            gender: {
+                "23": 2.62, "24": 1.45, "25": 1.70, "26": 1.74, "27": 2.86, "28": 5.46, "default": 1.6
+            },
+            steroids: {
+                "23": 5.00, "24": 5.60, "25": 4.90, "26": 3.30, "27": 5.60, "28": 6.10, "default": 4.5
+            },
+            multiple: {
+                "23": 1.24, "24": 1.12, "25": 1.58, "26": 0.96, "27": 1.56, "28": 2.47, "default": 1.1
+            }
+        };
+
+        // עדכון דינמי של המשקל לפי שבוע ההיריון שנבחר ישירות מתוך המפתחות הקיימים בטבלה א.4
+        function updateWeightOptions() {
+            const gestation = document.getElementById('gestation').value;
+            const weightSelect = document.getElementById('weight');
+            weightSelect.innerHTML = '';
+
+            const weightLabels = {
+                "<500": "פחות מ-500 גרם",
+                "500-750": "500-749 גרם",
+                "751-1000": "750-999 גרם",
+                "1001-1250": "1001-1250 גרם",
+                "1251-1500": "1251-1500 גרם"
+            };
+
+            const availableWeights = rawSurvivalData[gestation];
+            if (availableWeights) {
+                // שמירה על סדר משקלים עולה
+                const orderedKeys = ["<500", "500-750", "751-1000", "1001-1250", "1251-1500"];
+                orderedKeys.forEach(key => {
+                    if (availableWeights[key] !== undefined) {
+                        const el = document.createElement('option');
+                        el.value = key;
+                        el.textContent = weightLabels[key] || key;
+                        weightSelect.appendChild(el);
+                    }
+                });
+            }
+        }
+
+        // הגדרת משתני קלט ויזואליים
+        function setGender(gender) {
+            currentGender = gender;
+            document.getElementById('btn-male').className = gender === 'male' ? "py-3 px-4 rounded-lg font-semibold border-2 border-blue-600 bg-blue-50 text-blue-700 transition" : "py-3 px-4 rounded-lg font-semibold border border-slate-300 bg-white hover:bg-slate-50 transition";
+            document.getElementById('btn-female').className = gender === 'female' ? "py-3 px-4 rounded-lg font-semibold border-2 border-blue-600 bg-blue-50 text-blue-700 transition" : "py-3 px-4 rounded-lg font-semibold border border-slate-300 bg-white hover:bg-slate-50 transition";
+        }
+
+        function setSteroids(steroids) {
+            currentSteroids = steroids;
+            document.getElementById('btn-steroids-yes').className = steroids === 'yes' ? "py-3 px-4 rounded-lg font-semibold border-2 border-blue-600 bg-blue-50 text-blue-700 transition" : "py-3 px-4 rounded-lg font-semibold border border-slate-300 bg-white hover:bg-slate-50 transition";
+            document.getElementById('btn-steroids-no').className = steroids === 'no' ? "py-3 px-4 rounded-lg font-semibold border-2 border-blue-600 bg-blue-50 text-blue-700 transition" : "py-3 px-4 rounded-lg font-semibold border border-slate-300 bg-white hover:bg-slate-50 transition";
+        }
+
+        function setMultiple(multiple) {
+            currentMultiple = multiple;
+            document.getElementById('btn-multiple-yes').className = multiple === 'yes' ? "py-3 px-4 rounded-lg font-semibold border-2 border-blue-600 bg-blue-50 text-blue-700 transition" : "py-3 px-4 rounded-lg font-semibold border border-slate-300 bg-white hover:bg-slate-50 transition";
+            document.getElementById('btn-multiple-no').className = multiple === 'no' ? "py-3 px-4 rounded-lg font-semibold border-2 border-blue-600 bg-blue-50 text-blue-700 transition" : "py-3 px-4 rounded-lg font-semibold border border-slate-300 bg-white hover:bg-slate-50 transition";
+        }
+
+        // חישוב הישרדות משולב מבוסס מודל רגרסיה לוגיסטית מכויל
+        function calculateSurvival(gestation, weight, gender, steroids, multiple) {
+            if (gestation === "22") {
+                return 0.0; // לפי נתוני האמת של 2023, לא היו שורדים בשבוע 22
+            }
+
+            // שלב א': חילוץ הסתברות בסיס לשבוע ומשקל
+            let p_base_arr = rawSurvivalData[gestation]?.[weight] || rawSurvivalData[gestation]?.["overall"];
+            let p_base = p_base_arr[0] / 100;
+
+            let p_clamped = Math.max(0.01, Math.min(0.99, p_base));
+            let odds = p_clamped / (1 - p_clamped);
+
+            // שלב ב': התאמת ה-Odds על פי משתני העזר
+            let g_or = adjustments.gender[gestation] || adjustments.gender["default"];
+            if (gender === 'female') {
+                odds *= Math.sqrt(g_or);
+            } else {
+                odds /= Math.sqrt(g_or);
+            }
+
+            let s_or = adjustments.steroids[gestation] || adjustments.steroids["default"];
+            if (steroids === 'yes') {
+                odds *= Math.sqrt(s_or);
+            } else {
+                odds /= Math.sqrt(s_or);
+            }
+
+            let m_or = adjustments.multiple[gestation] || adjustments.multiple["default"];
+            if (multiple === 'yes') {
+                odds *= Math.sqrt(m_or);
+            } else {
+                odds /= Math.sqrt(m_or);
+            }
+
+            // שלב ג': החזרה חזרה להסתברות
+            let p_adjusted = odds / (1 + odds);
+            let final_percentage = p_adjusted * 100;
+
+            if (gestation === "23" && steroids === "no") {
+                final_percentage = 0.0; // טבלה 17 מראה 0% הישרדות בשבוע 23 ללא סטרואידים
+            }
+
+            return Math.min(100, Math.max(0, final_percentage));
+        }
+
+        function performCalculation() {
+            const gestation = document.getElementById('gestation').value;
+            const weight = document.getElementById('weight').value;
+
+            // החלפת תצוגת הפלייסהולדר
+            document.getElementById('no-result-placeholder').classList.add('hidden');
+            document.getElementById('results-container').classList.remove('hidden');
+
+            // 1. חישוב הישרדות משולבת
+            const finalSurvival = calculateSurvival(gestation, weight, currentGender, currentSteroids, currentMultiple);
+            
+            // עדכון הממשק הוויזואלי (העיגול והטקסט)
+            const survivalText = document.getElementById('survival-percentage');
+            survivalText.textContent = finalSurvival.toFixed(1) + "%";
+            
+            const progressBar = document.getElementById('survival-progress-bar');
+            const circumference = 2 * Math.PI * 42; 
+            const strokeDashoffset = circumference - (finalSurvival / 100) * circumference;
+            progressBar.style.strokeDashoffset = strokeDashoffset;
+
+            // צבע הבר לפי אחוזי הישרדות
+            if (finalSurvival > 75) {
+                progressBar.className = "text-emerald-500 transition-all duration-1000 ease-out";
+            } else if (finalSurvival > 40) {
+                progressBar.className = "text-amber-500 transition-all duration-1000 ease-out";
+            } else {
+                progressBar.className = "text-rose-500 transition-all duration-1000 ease-out";
+            }
+
+            // 2. הצגת ערכי בסיס להשוואה מהדו"ח
+            const baseSurvival = rawSurvivalData[gestation]?.[weight] || [0, "אין נתונים"];
+            document.getElementById('base-survival-val').textContent = baseSurvival[0].toFixed(1) + "%";
+            document.getElementById('base-survival-ref').textContent = `קבוצת משקל וגיל זו בדו"ח: ${baseSurvival[0].toFixed(1)}% מתוך מקרי אמת (N = ${baseSurvival[1]})`;
+
+            const weeklySurvival = rawSurvivalData[gestation]?.["overall"] || [0, "אין נתונים"];
+            document.getElementById('weekly-survival-val').textContent = weeklySurvival[0].toFixed(1) + "%";
+            document.getElementById('weekly-survival-ref').textContent = `כלל היילודים בשבוע זה בדו"ח: ${weeklySurvival[0].toFixed(1)}% מתוך מקרי אמת (N = ${weeklySurvival[1]})`;
+
+            // 3. רינדור ברי התחלואה (טבלה א.10)
+            const morb = morbidityData[gestation] || { ivh: 0, pvl: 0, nec: 0, bpd: 0, rop: 0, sepsis: 0 };
+            const morbidityContainer = document.getElementById('morbidity-bars');
+            morbidityContainer.innerHTML = '';
+
+            const morbidityLabels = [
+                { key: 'ivh', label: 'דימום מוחי דרגה 3-4 (Severe IVH)', color: 'bg-rose-600' },
+                { key: 'pvl', label: 'נזק מוחי לבן (Cystic PVL)', color: 'bg-orange-500' },
+                { key: 'nec', label: 'דלקת מעי נמקית (NEC)', color: 'bg-amber-500' },
+                { key: 'bpd', label: 'מחלת ריאות כרונית (BPD)', color: 'bg-blue-600' },
+                { key: 'rop', label: 'סיבוך רשתית קשה / מטופל (ROP)', color: 'bg-indigo-600' },
+                { key: 'sepsis', label: 'אלח דם מאוחר (Late Sepsis)', color: 'bg-purple-600' }
+            ];
+
+            morbidityLabels.forEach(m => {
+                const percent = morb[m.key];
+                
+                const card = document.createElement('div');
+                card.className = "space-y-1";
+                card.innerHTML = `
+                    <div class="flex justify-between text-xs font-semibold text-slate-700">
+                        <span>${m.label}</span>
+                        <span>${percent.toFixed(1)}%</span>
+                    </div>
+                    <div class="w-full bg-slate-200 h-2.5 rounded-full overflow-hidden">
+                        <div class="${m.color} h-full rounded-full transition-all duration-1000" style="width: ${percent}%"></div>
+                    </div>
+                `;
+                morbidityContainer.appendChild(card);
+            });
+        }
+
+        // פונקציה להצגת התראה
+        function showNotification(message, isError = false) {
+            const toast = document.getElementById('toast');
+            toast.textContent = message;
+            if (isError) {
+                toast.className = "fixed bottom-5 left-5 bg-rose-600 text-white px-6 py-3 rounded-xl shadow-2xl z-50 text-sm font-semibold transition-all duration-300 transform translate-y-0 opacity-100";
+            } else {
+                toast.className = "fixed bottom-5 left-5 bg-slate-900 text-white px-6 py-3 rounded-xl shadow-2xl z-50 text-sm font-semibold transition-all duration-300 transform translate-y-0 opacity-100";
+            }
+            toast.classList.remove('hidden');
+
+            setTimeout(() => {
+                toast.className = "fixed bottom-5 left-5 bg-slate-900 text-white px-6 py-3 rounded-xl shadow-2xl z-50 text-sm font-semibold transition-all duration-300 transform translate-y-2 opacity-0";
+                setTimeout(() => toast.classList.add('hidden'), 300);
+            }, 4000);
+        }
+
+        // פונקציית הורדה ישירה ומאובטחת של קובץ ה-HTML
+        function downloadSelf() {
+            try {
+                const fullSource = '<!DOCTYPE html>\n' + document.documentElement.outerHTML;
+                const blob = new Blob([fullSource], { type: 'text/html;charset=utf-8' });
+                const url = URL.createObjectURL(blob);
+                const a = document.createElement('a');
+                a.href = url;
+                a.download = 'neonatal_calculator_2023.html';
+                document.body.appendChild(a);
+                a.click();
+                document.body.removeChild(a);
+                URL.revokeObjectURL(url);
+                showNotification('המחשבון הורד בהצלחה כקובץ HTML אל תיקיית ההורדות במחשבך!');
+            } catch (e) {
+                showNotification('הורדה ישירה נכשלה עקב הגדרות אבטחה של הדפדפן.', true);
+            }
+        }
+
+        // ריצה ראשונית של קביעת אפשרויות קלט
+        window.onload = function() {
+            updateWeightOptions();
+        }
+    </script>
+</body>
+</html>
